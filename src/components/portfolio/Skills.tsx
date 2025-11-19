@@ -50,27 +50,29 @@ const Skills = () => {
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto space-y-12">
           <div className="text-center space-y-4 animate-fade-in">
-            <h2 className="text-4xl md:text-5xl font-bold text-gradient">Skills & Technologies</h2>
-            <div className="w-20 h-1 bg-primary mx-auto rounded-full" />
+            <h2 className="text-4xl md:text-5xl font-bold text-gradient animate-pulse-subtle">Skills & Technologies</h2>
+            <div className="w-20 h-1 bg-primary mx-auto rounded-full animate-width-expand" />
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {skillGroups.map((group, index) => (
               <Card
                 key={group.title}
-                className="bg-card/50 backdrop-blur-sm border-border hover:border-primary/50 transition-all duration-300 hover:scale-105 animate-slide-up"
-                style={{ animationDelay: `${index * 0.1}s` }}
+                className="bg-card/50 backdrop-blur-sm border-border hover:border-primary/50 transition-all duration-500 hover:scale-[1.08] hover:shadow-glow-card hover:-translate-y-2 group animate-slide-up-fade overflow-hidden relative"
+                style={{ animationDelay: `${index * 0.15}s` }}
               >
-                <CardHeader>
-                  <CardTitle className="text-xl">{group.title}</CardTitle>
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <CardHeader className="relative">
+                  <CardTitle className="text-xl group-hover:text-gradient transition-all duration-300">{group.title}</CardTitle>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="relative">
                   <div className="flex flex-wrap gap-2">
-                    {group.skills.map((skill) => (
+                    {group.skills.map((skill, skillIndex) => (
                       <Badge
                         key={skill}
                         variant="outline"
-                        className={`${group.color} hover:scale-110 transition-transform cursor-default`}
+                        className={`${group.color} hover:scale-110 hover:-rotate-2 transition-all duration-300 cursor-default animate-badge-cascade`}
+                        style={{ animationDelay: `${index * 0.15 + skillIndex * 0.05}s` }}
                       >
                         {skill}
                       </Badge>

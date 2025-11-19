@@ -54,24 +54,29 @@ const Experience = () => {
 
           <div className="relative">
             {/* Timeline line */}
-            <div className="hidden md:block absolute left-8 top-0 bottom-0 w-0.5 bg-border" />
+            <div className="hidden md:block absolute left-8 top-0 bottom-0 w-0.5 bg-border">
+              <div className="absolute top-0 left-0 w-full h-0 bg-gradient-to-b from-primary to-accent animate-timeline-draw" />
+            </div>
 
             <div className="space-y-8">
               {experiences.map((exp, index) => (
                 <div
                   key={exp.company}
-                  className="relative animate-slide-up"
-                  style={{ animationDelay: `${index * 0.2}s` }}
+                  className="relative animate-slide-in-left"
+                  style={{ animationDelay: `${index * 0.3}s` }}
                 >
                   {/* Timeline dot */}
-                  <div className="hidden md:block absolute left-6 top-6 w-5 h-5 bg-primary rounded-full border-4 border-background" />
+                  <div className="hidden md:block absolute left-6 top-6 w-5 h-5 bg-primary rounded-full border-4 border-background animate-dot-pulse group-hover:scale-150 group-hover:shadow-glow transition-all duration-300" 
+                    style={{ animationDelay: `${index * 0.3 + 0.5}s` }} />
 
-                  <Card className="md:ml-20 bg-card/50 backdrop-blur-sm border-border hover:border-primary/50 transition-all duration-300 hover:scale-[1.02]">
-                    <CardHeader>
+                  <Card className="md:ml-20 bg-card/50 backdrop-blur-sm border-border hover:border-primary/50 transition-all duration-500 hover:scale-[1.03] hover:shadow-glow-card hover:-translate-x-2 group relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    <CardHeader className="relative">
                       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
                         <div className="space-y-2">
-                          <CardTitle className="text-2xl flex items-center gap-2">
-                            <Briefcase className="h-5 w-5 text-primary" />
+                          <CardTitle className="text-2xl flex items-center gap-2 group-hover:text-gradient transition-all duration-300">
+                            <Briefcase className="h-5 w-5 text-primary animate-icon-bounce group-hover:rotate-12 transition-all duration-300" 
+                              style={{ animationDelay: `${index * 0.3 + 0.3}s` }} />
                             {exp.title}
                           </CardTitle>
                           <CardDescription className="text-base">
@@ -84,18 +89,27 @@ const Experience = () => {
                         </Badge>
                       </div>
                     </CardHeader>
-                    <CardContent className="space-y-4">
+                    <CardContent className="space-y-4 relative">
                       <ul className="space-y-2">
                         {exp.highlights.map((highlight, idx) => (
-                          <li key={idx} className="text-muted-foreground flex gap-2">
-                            <span className="text-primary mt-1">•</span>
+                          <li 
+                            key={idx} 
+                            className="text-muted-foreground flex gap-2 animate-bullet-fade group-hover:translate-x-1 transition-all duration-300"
+                            style={{ animationDelay: `${index * 0.3 + idx * 0.1}s` }}
+                          >
+                            <span className="text-primary mt-1 group-hover:scale-125 transition-transform duration-300">•</span>
                             <span>{highlight}</span>
                           </li>
                         ))}
                       </ul>
                       <div className="flex flex-wrap gap-2 pt-4">
-                        {exp.tags.map((tag) => (
-                          <Badge key={tag} variant="secondary" className="text-xs">
+                        {exp.tags.map((tag, tagIndex) => (
+                          <Badge 
+                            key={tag} 
+                            variant="secondary" 
+                            className="text-xs group-hover:scale-110 transition-all duration-300 animate-badge-wave"
+                            style={{ animationDelay: `${index * 0.3 + tagIndex * 0.05}s` }}
+                          >
                             {tag}
                           </Badge>
                         ))}
